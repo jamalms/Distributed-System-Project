@@ -1,60 +1,48 @@
 package grpc.Client;
 
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import javax.jmdns.ServiceInfo;
-
-import grpc.invasionEvent.InvasionEvent;
-import grpc.invasionEvent.InvasionServiceDiscovery;
 import grpc.invasionEvent.checkRoomStatus;
 import grpc.invasionEvent.invasionAlarm;
 import grpc.invasionEvent.invasionAlarm.Builder;
 import grpc.invasionEvent.invasionEventGrpc;
 import grpc.invasionEvent.invasionEventGrpc.invasionEventBlockingStub;
 import grpc.invasionEvent.invasionEventGrpc.invasionEventImplBase;
-import grpc.temperature.TemperatureServiceDiscovery;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import io.grpc.StatusRuntimeException;
 import io.grpc.stub.StreamObserver;
 
 public class InvasionEventClient{
-	private static final Logger logger = Logger.getLogger(InvasionEvent.class.getName());
+	
 	public static void main(String[] args) throws Exception {
 		
 		
-
-		ServiceInfo serviceInfo;
-		String service_type = "_grpc._tcp.local.InvasionEvent";
-		//Now retrieve the service info - all we are supplying is the service type
-		serviceInfo = InvasionServiceDiscovery.run(service_type);
-		//Use the serviceInfo to retrieve the port
-		int port = serviceInfo.getPort();
+		
+		
+		///////InvasionEvent
+		//Build a channel
+		int portInvasion = 50054;
 		String host = "localhost";
-		//int port = 50051;
+		
+		ManagedChannel newChannelInvasion = ManagedChannelBuilder.forAddress(host, portInvasion ).usePlaintext().build();
+		
+		//containsString cString = containsString.newBuilder().setFirstString("test1").build();
+		checkRoomStatus roomSta = checkRoomStatus.newBuilder().setFirstRoomSound(80).setFirstRoomTemperature(23).
+				setFirstRoomPressure(62)
+				.build();
 		
 		
-		ManagedChannel newChannelInvasion = ManagedChannelBuilder.forAddress(host, port ).usePlaintext().build();
-		
-		
-		
-		
-		
-		
-		
+		//newServiceBlockingStub bstub = newServiceGrpc.newBlockingStub(newChannel);
+		//Builder request = invasionAlarm.newBuilder();
 		checkRoomStatus.Builder request = checkRoomStatus.newBuilder(); 
 				invasionAlarm.Builder response = invasionAlarm.newBuilder();
 				invasionAlarm.Builder response1 = invasionAlarm.newBuilder();
 				invasionAlarm.Builder response2 = invasionAlarm.newBuilder();
+				//Noise 
+				//Builder firstRoomSound = response.setSoundIntensityAlarm("The Sound Intensity is: ");
+				//System.out.println( firstRoomSound);
 				
-				try {
-				checkRoomStatus roomSta = checkRoomStatus.newBuilder().setFirstRoomSound(80).setFirstRoomTemperature(23).
-						setFirstRoomPressure(62)
-						.build();
-				//Noise
-				
+				//Noise 
 				float firstRoomSound = roomSta.getFirstRoomSound();
 				//System.out.println("The Sound Intensity is: " +firstRoomSound + response.getSoundIntensityAlarm());
 				
@@ -66,12 +54,8 @@ public class InvasionEventClient{
 				else { //return message
 					response.setSoundIntensityAlarm("No noise is found");
 				}
-				logger.info("The Noise Intensity: " + response.getSoundIntensityAlarm());
-				
 		System.out.println("The Sound Intensity is: " + roomSta.getFirstRoomSound() +" " + response);
-				
-				
-				
+		
 		//Temperature
 		float firstRoomTemperature = roomSta.getFirstRoomTemperature();
 		//System.out.println("The Temperature is: " +firstRoomTemperature);
@@ -84,7 +68,6 @@ public class InvasionEventClient{
 		else { //return message
 			response1.setObjectTempAlarm("The temmperature is normal");
 		}
-		logger.info("Temperature: " + response1.getObjectTempAlarm());
 		System.out.println("The Object Temperature is: "+ roomSta.getFirstRoomTemperature() + " " + response1);
 		
 		//Room Pressure
@@ -99,16 +82,15 @@ public class InvasionEventClient{
 		else { //return message
 			response2.setAirPressureAlarm("The room pressure is NORMAL");
 		}
-		logger.info("Air pressure: " + response2.getAirPressureAlarm());
-		System.out.println("The Air Room Pressure is: " + roomSta.getFirstRoomPressure() + " " + response2);
-	}
-		catch(StatusRuntimeException e) { logger.log(Level.WARNING, "RPC failed: {0}", e.getStatus());
-	    
-	    return;}
 		
-		//newChannelInvasion.shutdown().awaitTermination(20, TimeUnit.SECONDS);
-				finally{//shutdown channel
-			    	newChannelInvasion.shutdown().awaitTermination(5, TimeUnit.SECONDS);}
+		System.out.println("The Air Room Pressure is: " + roomSta.getFirstRoomPressure() + " " + response2);
+		
+		//System.out.println("The Sound Intensity is: " + roomSta.getFirstRoomSound()+ firstRoomSound);
+		//System.out.println("The Air Room Pressure is: " + roomSta.getFirstRoomPressure());
+		//System.out.println("The Object Temperature is: " + roomSta.getFirstRoomTemperature());
+		
+		newChannelInvasion.shutdown().awaitTermination(20, TimeUnit.SECONDS);
+	
 		
 
 	}

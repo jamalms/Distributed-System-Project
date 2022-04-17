@@ -1,48 +1,28 @@
 package grpc.invasionEvent;
 
 import java.io.IOException;
-import java.util.logging.Logger;
 
 import grpc.invasionEvent.invasionEventGrpc.invasionEventImplBase;
-import grpc.temperature.Temperature;
-import grpc.temperature.TemperatureServiceRegistration;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
 
-public class InvasionEvent extends invasionEventImplBase{
+public class InvasionEvent{
 	
-	private static final Logger logger = Logger.getLogger(InvasionEvent.class.getName());
+	private Server server;
 	
 	public static void main(String[] args) throws InterruptedException, IOException {
 		InvasionEvent ourServer = new InvasionEvent();
-		int port = 50064;
-		String service_type = "_grpc._tcp.local.InvasionEvent";
-		String service_name = "InvasionEvent";
-		InvesionServiceRegistration invSs = new InvesionServiceRegistration();
-		invSs.run(port, service_type, service_name);
+		ourServer.start();
 		
-	    
-		try {
-			Server server = ServerBuilder.forPort(port)
-			    .addService(ourServer)
-			    .build()
-			    .start();
-			System.out.println("\nServer V1.2 Started");
-			
-			 server.awaitTermination();
-
-			 
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	    
-	    logger.info("Server started, listening on " + port);
+	}
+	void start() throws IOException, InterruptedException {
+		System.out.println("Starting gRPC Server");
+		int port = 50054;
+		
+		server = ServerBuilder.forPort(port).addService(new InvasionEventImpl()).build().start();
+		System.out.println("Server running on port: " +port);
+		server.awaitTermination();
 	}
 	
 	static class InvasionEventImpl extends invasionEventImplBase {

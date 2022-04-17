@@ -1,53 +1,33 @@
 package grpc.pressure;
 
 import java.io.IOException;
-import java.util.logging.Logger;
+
 
 import grpc.pressure.Pressure;
 import grpc.pressure.pressureGrpc.pressureImplBase;
-import grpc.temperature.Temperature;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
 
-public class Pressure extends pressureImplBase{
+public class Pressure{
+	private Server server;
 	
-	
-	private static final Logger logger = Logger.getLogger(Pressure.class.getName());
-public static void main(String[] args) {
-		
-	Pressure ourServer = new Pressure();
-		
-		int port = 50060;
-		String service_type = "_grpc._tcp.local.Pressure";
-		String service_name = "PressureService";
-		PressureServiceRegistration PreSs = new PressureServiceRegistration();
-		PreSs.run(port, service_type, service_name);
-		
-	    
-		try {
-			Server server = ServerBuilder.forPort(port)
-			    .addService(ourServer)
-			    .build()
-			    .start();
-			System.out.println("\nServer V1.2 Started");
-			
-			 server.awaitTermination();
+	public static void main(String[] args) throws InterruptedException, IOException {
+		Pressure ourServer = new Pressure();
+		ourServer.start();
 
-			 
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	    
-	    logger.info("Server started, listening on " + port);
-	    		    
 	}
 	
+	private void start() throws IOException, InterruptedException {
+		System.out.println("Starting gRPC Server");
+		int port = 50053;
+		
+		server = ServerBuilder.forPort(port).addService(new PressureRoomImpl()).build().start();
+		System.out.println("Server running on port: " +port);
+		server.awaitTermination();
+	}
+	
+	static class PressureRoomImpl extends pressureImplBase{
 
 		@Override
 		public void roomPressure(checkPressure request, StreamObserver<PressureAlarm> responseObserver) {
@@ -56,7 +36,7 @@ public static void main(String[] args) {
 			System.out.println("The Room Pressure is: " +firstPressure);
 			PressureAlarm.Builder response = PressureAlarm.newBuilder();
 			
-			if(firstPressure != 64) {
+			if(firstPressure != 63.21) {
 				//return message
 			response.setPressureAlarm("Pressure Alarm Is Activated \n" + "Alerts, Air Pressure out of the range");
 			}
@@ -69,5 +49,5 @@ public static void main(String[] args) {
 		}
 		
 		
-	
+	}
 }

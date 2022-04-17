@@ -3,7 +3,6 @@
 package grpc.temperature;
 
 import java.io.IOException;
-import java.util.logging.Logger;
 
 import io.grpc.BindableService;
 import io.grpc.Server;
@@ -12,42 +11,24 @@ import io.grpc.ServerServiceDefinition;
 import io.grpc.stub.StreamObserver;
 import grpc.temperature.temperatureGrpc.temperatureImplBase;
 
-public class Temperature extends temperatureImplBase  {
-	private static final Logger logger = Logger.getLogger(Temperature.class.getName());
-public static void main(String[] args) {
-		
-		Temperature ourServer = new Temperature();
-		
-		int port = 50059;
-		String service_type = "_grpc._tcp.local.";
-		String service_name = "TemperatureService";
-		TemperatureServiceRegistration tempSs = new TemperatureServiceRegistration();
-		tempSs.run(port, service_type, service_name);
-		
-	    
-		try {
-			Server server = ServerBuilder.forPort(port)
-			    .addService(ourServer)
-			    .build()
-			    .start();
-			System.out.println("\nServer V1.2 Started");
-			
-			 server.awaitTermination();
-
-			 
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	    
-	    logger.info("Server started, listening on " + port);
-	    		    
-	}
+public class Temperature  {
+	private Server server;
 	
+	public static void main(String[] args) throws InterruptedException, IOException {
+		Temperature ourServer = new Temperature();
+		ourServer.start();
+
+	}
+	private void start() throws IOException, InterruptedException {
+		System.out.println("Starting gRPC Server");
+		int port = 50051;
+		
+		server = ServerBuilder.forPort(port).addService(new TempRoomImpl()).build().start();
+		System.out.println("Server running on port: " +port);
+		server.awaitTermination();
+	}
+
+	static class TempRoomImpl extends temperatureImplBase {
 
 	public void sendTemperature(checkTemperature request, StreamObserver<temperatureAlarm> responseObserver) {
 		
@@ -57,9 +38,9 @@ public static void main(String[] args) {
 		System.out.println("The temperature is: " +firstTemperature);
 		temperatureAlarm.Builder response = temperatureAlarm.newBuilder();
 		
-		if(firstTemperature > 25) {
+		if(firstTemperature >= 25) {
 			//return message
-		response.setTempAlarm("Temperature Alarm Is Activated. Alerts, Human Presence");
+		response.setTempAlarm("Temperature Alarm Is Activated");
 		}
 		else {
 			response.setTempAlarm("The temmperature is normal");
@@ -74,3 +55,4 @@ public static void main(String[] args) {
 
 	
 	}
+}

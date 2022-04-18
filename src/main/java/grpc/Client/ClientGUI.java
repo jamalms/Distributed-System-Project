@@ -49,7 +49,7 @@ public class ClientGUI implements ActionListener{
 		panel.add(entry1);
 		panel.add(Box.createRigidArea(new Dimension(10, 0)));
 
-		JButton button = new JButton("Invoke Temperature Service 1");
+		JButton button = new JButton("Invoke Temperature Service");
 		button.addActionListener(this);
 		panel.add(button);
 		panel.add(Box.createRigidArea(new Dimension(10, 0)));
@@ -146,10 +146,10 @@ public class ClientGUI implements ActionListener{
 		// Set border for the panel
 		panel.setBorder(new EmptyBorder(new Insets(50, 100, 50, 100)));
 	
-		panel.add( getNoiseJPanel() );
+		
 		panel.add( getTemperatureJPanel() );
 		panel.add( getPressureJPanel() );
-		
+		panel.add( getNoiseJPanel() );
 
 		// Set size for the frame
 		frame.setSize(300, 300);
@@ -177,13 +177,13 @@ public class ClientGUI implements ActionListener{
 			//ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051).usePlaintext().build();
 			ManagedChannel newChannel = ManagedChannelBuilder.forAddress("localhost", 50051).usePlaintext().build();
 			//Service1Grpc.Service1BlockingStub blockingStub = Service1Grpc.newBlockingStub(channel);
-			temperatureBlockingStub tempStub = temperatureGrpc.newBlockingStub(newChannel);
+			temperatureGrpc.temperatureBlockingStub tempStub = temperatureGrpc.newBlockingStub(newChannel);
 
 			//preparing message to send
 			//ds.service1.RequestMessage request1 = ds.service1.RequestMessage.newBuilder().setText(entry1.getText()).build();
-			grpc.temperature.checkTemperature request = grpc.temperature.checkTemperature.newBuilder().setFirstTemperature(0).build();
+			grpc.temperature.checkTemperature request = grpc.temperature.checkTemperature.newBuilder().setFirstTemperature(25).build();
 			//checkTemperature roomTemp = checkTemperature.newBuilder().setFirstTemperature(entry1.getFirstTemperature).build();
-			temperatureAlarm response = tempStub.sendTemperature(request);
+			grpc.temperature.temperatureAlarm response = tempStub.sendTemperature(request);
 			//retreving reply from service
 			//ds.service1.ResponseMessage response = blockingStub.service1Do(request);
 
@@ -207,8 +207,8 @@ public class ClientGUI implements ActionListener{
 
 			//retreving reply from service
 			//ds.service2.ResponseMessage response = blockingStub.service2Do(request);
-			noiseAlarm noiseResponse = noiseStub.sound(request);
-			reply2.setText( String.valueOf( noiseResponse.getSoundAlarm()) );
+			grpc.noise.noiseAlarm response = noiseStub.sound(request);
+			reply3.setText( String.valueOf( response.getSoundAlarm()) );
 			
 		}else if (label.equals("Invoke Pressure Service ")) {
 			System.out.println("service 3 to be invoked ...");
@@ -226,7 +226,7 @@ public class ClientGUI implements ActionListener{
 			//retreving reply from service
 			grpc.pressure.PressureAlarm response = pressureStub.roomPressure(request);
 
-			reply3.setText( String.valueOf( response.getPressureAlarm()) );
+			reply2.setText( String.valueOf( response.getPressureAlarm()) );
 		
 		
 		

@@ -28,7 +28,7 @@ public class TemperatureClient{
 		ManagedChannel newChannel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
 		
 		//containsString cString = containsString.newBuilder().setFirstString("test1").build();
-		checkTemperature roomTemp = checkTemperature.newBuilder().setFirstTemperature(23).build();
+		checkTemperature roomTemp = checkTemperature.newBuilder().setFirstTemperature(70).build();
 		//newServiceBlockingStub bstub = newServiceGrpc.newBlockingStub(newChannel);
 		temperatureBlockingStub tempStub = temperatureGrpc.newBlockingStub(newChannel);
 		

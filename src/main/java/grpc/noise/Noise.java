@@ -39,7 +39,7 @@ private Server server;
 			System.out.println("The Room voise is: " +firstSound);
 			noiseAlarm.Builder response = noiseAlarm.newBuilder();
 			
-			if(firstSound >= 45) {
+			if(firstSound > 45) {
 				//return message
 			response.setSoundAlarm("Noise Alarm Is Activated \n" + "Alerts, Human Presence, High noise intensity");
 			}

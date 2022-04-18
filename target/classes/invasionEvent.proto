@@ -1,0 +1,46 @@
+
+syntax = "proto3";
+
+option java_package = "grpc.invasionEvent";
+option java_multiple_files = true;
+option java_outer_classname = "InvasionEventImpl";
+
+service invasionEvent{
+
+ rpc roomStatus  (stream checkRoomStatus) returns (stream invasionAlarm){}
+}
+
+message checkRoomStatus  {
+float firstRoomSound =1;
+float firstRoomTemperature =2;
+float firstRoomPressure =3;
+}
+
+message invasionAlarm {
+string soundIntensityAlarm =1;
+string objectTempAlarm =2;
+string airPressureAlarm =3;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

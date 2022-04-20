@@ -1,6 +1,7 @@
 Temperature$1.class
 grpc\noise\noiseAlarmOrBuilder.class
 grpc\temperature\temperatureAlarm$Builder.class
+grpc\temperature\TemperatureJmdns.class
 grpc\invasionEvent\invasionEventGrpc$invasionEventBaseDescriptorSupplier.class
 grpc\pressure\pressureGrpc$pressureStub.class
 grpc\temperature\checkTemperatureOrBuilder.class
@@ -65,6 +66,8 @@ grpc\invasionEvent\invasionAlarm.class
 grpc\temperature\TempRoomImpl$1.class
 grpc\pressure\pressureGrpc$pressureFileDescriptorSupplier.class
 grpc\noise\NoiseRoomImpl.class
+grpc\temperature\TemperatureDiscovery$MyServiceListener.class
+grpc\temperature\TemperatureRegistration.class
 grpc\temperature\Temperature.class
 grpc\noise\Noise.class
 grpc\invasionEvent\checkRoomStatusOrBuilder.class
@@ -86,9 +89,11 @@ grpc\pressure\checkPressureOrBuilder.class
 grpc\temperature\checkTemperature$Builder.class
 grpc\noise\noiseGrpc$noiseFutureStub.class
 grpc\noise\noiseGrpc$noiseStub.class
+grpc\temperature\TemperatureDiscovery.class
 grpc\pressure\pressureGrpc$pressureImplBase.class
 grpc\invasionEvent\invasionEventGrpc$MethodHandlers.class
 grpc\pressure\checkPressure$Builder.class
+grpc\temperature\TemperatureDiscovery$1.class
 grpc\invasionEvent\invasionEventGrpc$invasionEventFutureStub.class
 grpc\Client\InvasionEventClient.class
 grpc\temperature\temperatureGrpc.class

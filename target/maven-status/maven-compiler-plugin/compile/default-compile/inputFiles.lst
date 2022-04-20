@@ -7,11 +7,13 @@ C:\Users\Jamal\eclipse-workspace\secureRoom\src\main\java\grpc\pressure\checkPre
 C:\Users\Jamal\eclipse-workspace\secureRoom\src\main\java\grpc\noise\checkNoiseOrBuilder.java
 C:\Users\Jamal\eclipse-workspace\secureRoom\src\main\java\grpc\temperature\checkTemperature.java
 C:\Users\Jamal\eclipse-workspace\secureRoom\src\main\java\grpc\noise\noiseAlarmOrBuilder.java
+C:\Users\Jamal\eclipse-workspace\secureRoom\src\main\java\grpc\temperature\TemperatureJmdns.java
 C:\Users\Jamal\eclipse-workspace\secureRoom\src\main\java\grpc\invasionEvent\invasionAlarm.java
 C:\Users\Jamal\eclipse-workspace\secureRoom\src\main\java\grpc\noise\Noise.java
 C:\Users\Jamal\eclipse-workspace\secureRoom\src\main\java\grpc\noise\NoiseRoomImpl.java
 C:\Users\Jamal\eclipse-workspace\secureRoom\src\main\java\grpc\temperature\checkTemperatureOrBuilder.java
 C:\Users\Jamal\eclipse-workspace\secureRoom\src\main\java\grpc\invasionEvent\InvasionEvent.java
+C:\Users\Jamal\eclipse-workspace\secureRoom\src\main\java\grpc\temperature\TemperatureDiscovery.java
 C:\Users\Jamal\eclipse-workspace\secureRoom\src\main\java\grpc\temperature\Temperature.java
 C:\Users\Jamal\eclipse-workspace\secureRoom\src\main\java\grpc\noise\noiseAlarm.java
 C:\Users\Jamal\eclipse-workspace\secureRoom\src\main\java\grpc\noise\noiseGrpc.java
@@ -32,5 +34,6 @@ C:\Users\Jamal\eclipse-workspace\secureRoom\src\main\java\grpc\invasionEvent\inv
 C:\Users\Jamal\eclipse-workspace\secureRoom\src\main\java\grpc\pressure\PressureAlarm.java
 C:\Users\Jamal\eclipse-workspace\secureRoom\src\main\java\grpc\invasionEvent\checkRoomStatus.java
 C:\Users\Jamal\eclipse-workspace\secureRoom\src\main\java\grpc\pressure\Pressure.java
+C:\Users\Jamal\eclipse-workspace\secureRoom\src\main\java\grpc\temperature\TemperatureRegistration.java
 C:\Users\Jamal\eclipse-workspace\secureRoom\src\main\java\grpc\pressure\PressureAlarmOrBuilder.java
 C:\Users\Jamal\eclipse-workspace\secureRoom\src\main\java\grpc\pressure\pressureGrpc.java

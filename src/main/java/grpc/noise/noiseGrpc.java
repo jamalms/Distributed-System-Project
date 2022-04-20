@@ -157,11 +157,6 @@ public final class noiseGrpc {
       return blockingUnaryCall(
           getChannel(), getSoundMethod(), getCallOptions(), request);
     }
-
-	public noiseAlarm noiseDO(checkNoise request) {
-		// TODO Auto-generated method stub
-		return null;
-	}
   }
 
   /**

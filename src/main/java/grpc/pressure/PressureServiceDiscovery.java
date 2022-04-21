@@ -70,6 +70,11 @@ public class PressureServiceDiscovery {
 		public void setServiceInfo(ServiceInfo serviceInfo) {
 			this.serviceInfo = serviceInfo;
 		}
+
+		@Override
+		public String toString() {
+			return "MyServiceListener [port=" + port + ", host=" + host + ", serviceInfo=" + serviceInfo + "]";
+		}
 		
 	}
 

@@ -13,7 +13,7 @@ import io.grpc.stub.StreamObserver;
 public class PressureJdmns extends pressureImplBase{
 	
 	
-	private static final Logger logger = Logger.getLogger(Pressure.class.getName());
+	private static final Logger logger = Logger.getLogger(PressureJdmns.class.getName());
 public static void main(String[] args) {
 		
 	PressureJdmns ourServer = new PressureJdmns ();

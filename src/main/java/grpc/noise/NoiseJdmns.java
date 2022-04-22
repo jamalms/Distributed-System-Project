@@ -19,7 +19,7 @@ public static void main(String[] args) {
 		
 		NoiseJdmns ourNoiseServer = new NoiseJdmns ();
 		
-		int port = 50061;
+		int port = 50052;
 		String service_type = "_grpc._tcp.local.Noise";
 		String service_name = "NoiseService";
 		NoiseServiceRegistration noiseSs = new NoiseServiceRegistration();

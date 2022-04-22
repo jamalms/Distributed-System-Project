@@ -2,8 +2,7 @@ package ClientJdmns;
 
 
 
-import javax.jmdns.JmDNS;
-import javax.jmdns.ServiceInfo;
+
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,7 +10,6 @@ import java.util.logging.Logger;
 import javax.jmdns.ServiceInfo;
 
 import grpc.pressure.PressureAlarm;
-import grpc.pressure.PressureJdmns;
 import grpc.pressure.PressureServiceDiscovery;
 import grpc.pressure.checkPressure;
 import grpc.pressure.pressureGrpc;
@@ -29,17 +27,14 @@ public class PressureClient {
 	public static void main(String[] args) throws Exception {
 		
 		ServiceInfo serviceInfo;
-		String service_type = "\"_grpc._tcp.local.\""; //"_grpc._tcp.local.Pressure"
+		String service_type = "_grpc._tcp.local.Pressure";
 		//Now retrieve the service info - all we are supplying is the service type
 		serviceInfo = PressureServiceDiscovery.run(service_type);
 		//Use the serviceInfo to retrieve the port
 		int port = serviceInfo.getPort();
 		String host = "localhost";
+		//int port = 50060;
 		
-		
-		
-		
-		//System.out.println(PressureClient.class.getTypeName());
 		ManagedChannel pressureNewChannel = ManagedChannelBuilder.
 				forAddress(host, port)
 				.usePlaintext()
@@ -50,9 +45,9 @@ public class PressureClient {
 	    
 	    try {
 	    	 float firstPressure =  64;
-	    	 checkPressure request = checkPressure.newBuilder().setFirstPressure(40).build();
+	    	 checkPressure roomPres = checkPressure.newBuilder().setFirstPressure(40).build();
 	    	 
-	    	 PressureAlarm pressureResponse = pressStub.roomPressure(request);
+	    	 PressureAlarm pressureResponse = pressStub.roomPressure(roomPres);
 	    	 
 	    	 logger.info("Air Pressure: " + pressureResponse.getPressureAlarm());
 	    	 
@@ -66,5 +61,6 @@ public class PressureClient {
 	    	pressureNewChannel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
 	    }
 	  }
-
+	
+	
 }

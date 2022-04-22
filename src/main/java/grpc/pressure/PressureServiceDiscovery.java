@@ -70,18 +70,13 @@ public class PressureServiceDiscovery {
 		public void setServiceInfo(ServiceInfo serviceInfo) {
 			this.serviceInfo = serviceInfo;
 		}
-
-		@Override
-		public String toString() {
-			return "MyServiceListener [port=" + port + ", host=" + host + ", serviceInfo=" + serviceInfo + "]";
-		}
 		
 	}
 
 	//public static void main(String[] args) {
 		public static ServiceInfo run(String service_type) {
 			
-			int port = 0;
+			int port = 50053;
 			ServiceInfo serviceInfo= null;
 			// get an instance of jmDNS
 					

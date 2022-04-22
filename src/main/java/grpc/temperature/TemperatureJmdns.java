@@ -18,7 +18,7 @@ public static void main(String[] args) {
 		
 	TemperatureJmdns ourServer = new TemperatureJmdns();
 		
-		int port = 50059;
+		int port = 50051;
 		String service_type = "_grpc._tcp.local.";
 		String service_name = "TemperatureService";
 		TemperatureRegistration tempSs = new TemperatureRegistration();

@@ -13,12 +13,12 @@ import io.grpc.stub.StreamObserver;
 public class PressureJdmns extends pressureImplBase{
 	
 	
-	private static final Logger logger = Logger.getLogger(PressureJdmns.class.getName());
+	private static final Logger logger = Logger.getLogger(Pressure.class.getName());
 public static void main(String[] args) {
 		
 	PressureJdmns ourServer = new PressureJdmns ();
 		
-		int port = 50060;
+		int port = 50053;
 		String service_type = "_grpc._tcp.local.Pressure";
 		String service_name = "PressureService";
 		PressureServiceRegistration PreSs = new PressureServiceRegistration();

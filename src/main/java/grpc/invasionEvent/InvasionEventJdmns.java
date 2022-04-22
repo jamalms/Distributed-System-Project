@@ -15,7 +15,7 @@ public class InvasionEventJdmns extends invasionEventImplBase{
 	
 	public static void main(String[] args) throws InterruptedException, IOException {
 		InvasionEventJdmns ourServer = new InvasionEventJdmns ();
-		int port = 50064;
+		int port = 50054;
 		String service_type = "_grpc._tcp.local.InvasionEvent";
 		String service_name = "InvasionEvent";
 		InvesionServiceRegistration invSs = new InvesionServiceRegistration();

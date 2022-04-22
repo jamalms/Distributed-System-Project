@@ -31,7 +31,7 @@ public class InvasionEventClient{
 				setFirstRoomPressure(62)
 				.build();
 		
-		
+		invasionEventBlockingStub bstub = invasionEventGrpc.newBlockingStub(newChannelInvasion);
 		//newServiceBlockingStub bstub = newServiceGrpc.newBlockingStub(newChannel);
 		//Builder request = invasionAlarm.newBuilder();
 		checkRoomStatus.Builder request = checkRoomStatus.newBuilder(); 

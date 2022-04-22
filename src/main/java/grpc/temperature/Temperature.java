@@ -40,7 +40,8 @@ public class Temperature  {
 		
 		if(firstTemperature >= 25) {
 			//return message
-		response.setTempAlarm("Temperature Alarm Is Activated");
+		response.setTempAlarm("Temperature Alarm Is Activated \n" + "Alert, a human presence in room");
+		
 		}
 		else {
 			response.setTempAlarm("The temmperature is normal");
